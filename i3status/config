@@ -1,0 +1,51 @@
+general {
+    output_format=i3bar
+    colors = true
+    interval = 1
+}
+
+order += "disk /"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+
+order += "battery 0"
+order += "time"
+order += "volume master"
+
+disk "/" {
+        format = "💻 %free"
+}
+
+cpu_usage {
+    format = "CPU %usage"
+}
+
+
+cpu_temperature 0 {
+    format = "♨️ %degrees °C"
+    max_threshold = 65
+    path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+battery 0 {
+        format = "Bat %status %remaining %emptytime"
+        format_down = "No battery"
+        status_chr = "🔌"
+        status_bat = "🔋"
+        status_unk = "⚡"
+        status_full = "☻ FULL"
+        path = "/sys/class/power_supply/BAT0/uevent"
+        low_threshold = 10
+}
+
+time {
+    format = "🕔 %m-%d %H:%M"
+}
+
+volume master {
+        format = "♪%volume"
+        format_muted = "♪muted"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
